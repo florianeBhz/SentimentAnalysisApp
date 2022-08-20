@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  backend:
+    image: backend
+    build:
+      context: ./src/sentimentanalysisapp/fastapibackend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+
+  frontend:
+    image: frontend
+    build:
+      context: ./src/sentimentanalysisapp/streamlitfrontend
+      dockerfile: Dockerfile
+    ports:
+      - 8501:8501
+    depends_on:
+      - backend
+
+
+
+
