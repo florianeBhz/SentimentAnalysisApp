@@ -8,6 +8,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8080:8080
+    volumes:
+      - ~/Documents/Projects/sentimentanalysismodel:/app/sentimentanalysismodel
 
   frontend:
     image: frontend
