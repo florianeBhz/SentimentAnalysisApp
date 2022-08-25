@@ -75,7 +75,8 @@ jobs:
         docker compose up -d 
         docker tag backend:latest $ECR_REGISTRY/$ECR_REPOSITORY:backend
         docker tag frontend:latest $ECR_REGISTRY/$ECR_REPOSITORY:frontend
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:backend
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:frontend
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY"
 
     
