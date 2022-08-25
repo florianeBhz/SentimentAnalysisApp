@@ -20,4 +20,4 @@ async def prediction(text : str):
     test_pred = test_trainer.predict([tokenizer(text,truncation=True,padding=True)]).predictions
     test_label= np.argmax(test_pred, axis=1)
     print(test_label)
-    return {"result":str(test_label[0])}
+    return {"result":str(test_label[0])} 
