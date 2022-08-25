@@ -30,6 +30,10 @@ on:
   push:
     branches:
       - "master"
+      
+  pull_request:
+    branches:
+      - "master"
 
 env:
   AWS_REGION: eu-west-3                   # set this to your preferred AWS region, e.g. us-west-1
@@ -63,13 +67,16 @@ jobs:
       id: build-image
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: latest
       run: |
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker-compose up -d --build $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY/frontend:$IMAGE_TAG
-        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+        docker compose up -d 
+        docker tag backend:latest $ECR_REGISTRY/$ECR_REPOSITORY:backend
+        docker tag frontend:latest $ECR_REGISTRY/$ECR_REPOSITORY:frontend
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:backend
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:frontend
+        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY"
 
     
