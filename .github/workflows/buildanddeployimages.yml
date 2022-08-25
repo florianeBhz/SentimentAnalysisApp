@@ -73,8 +73,9 @@ jobs:
         # push it to ECR so that it can
         # be deployed to ECS.
         docker compose up -d 
-        docker push backend:latest $ECR_REGISTRY/$ECR_REPOSITORY/backend:latest
-        docker push backend:latest $ECR_REGISTRY/$ECR_REPOSITORY/frontend:latest
+        docker tag backend:latest $ECR_REGISTRY/$ECR_REPOSITORY
+        docker tag backend:latest $ECR_REGISTRY/$ECR_REPOSITORY
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY"
 
     
