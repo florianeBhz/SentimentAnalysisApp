@@ -72,8 +72,8 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        docker-compose up -d --build $ECR_REGISTRY/$ECR_REPOSITORY 
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY/frontend:latest
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY: . 
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY/:$IMAGE_TAG"
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
     
