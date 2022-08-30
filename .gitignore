@@ -1,2 +1,6 @@
 env/
+logs/
+models/
+ray_results/
 src/sentimentanalysisapp/fastapibackend/sentimentanalysismodel/
+**/*.pyc
